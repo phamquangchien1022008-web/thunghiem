@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Lớp 12</title>
+   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   <style>
+       :root {
+           --pink: #ffd6e7;
+           --pink-dark: #ff9ecb;
+           --cream: #fff6fb;
+           --bg: #fffaf5;
+       }
+      
+       * { margin: 0; padding: 0; box-sizing: border-box; }
+      
+       body {
+           font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+           background: var(--bg);
+           color: #444;
+           line-height: 1.7;
+           overflow-x: hidden;
+       }
+      
+       /* Background hoa bay nhẹ nhàng */
+       .flower-bg {
+           position: fixed;
+           inset: 0;
+           pointer-events: none;
+           z-index: -1;
+           overflow: hidden;
+       }
+      
+       .flower {
+           position: absolute;
+           width: 16px;
+           height: 16px;
+           background: var(--pink);
+           border-radius: 50% 30% 60% 40%;
+           opacity: 0.45;
+           box-shadow: 0 0 10px var(--pink-dark);
+           animation: fly 22s linear infinite;
+       }
+      
+       .flower:nth-child(1) { left: 8%; top: 20%; animation-duration: 25s; animation-delay: -4s; }
+       .flower:nth-child(2) { left: 25%; top: 35%; animation-duration: 18s; animation-delay: -8s; background: #ff9ecb; }
+       .flower:nth-child(3) { left: 48%; top: 60%; animation-duration: 28s; animation-delay: -2s; }
+       .flower:nth-child(4) { left: 72%; top: 15%; animation-duration: 20s; animation-delay: -12s; background: #ff9ecb; }
+       .flower:nth-child(5) { left: 15%; top: 75%; animation-duration: 24s; animation-delay: -6s; }
+       .flower:nth-child(6) { left: 85%; top: 45%; animation-duration: 19s; animation-delay: -10s; }
+      
+       @keyframes fly {
+           0%   { transform: translateY(100vh) rotate(0deg); }
+           100% { transform: translateY(-100px) rotate(360deg); }
+       }
+      
+       header {
+           position: sticky;
+           top: 0;
+           background: var(--pink);
+           padding: 18px 6%;
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           z-index: 1000;
+           box-shadow: 0 4px 20px rgba(255,158,203,0.3);
+       }
+      
+       .logo {
+           font-size: 28px;
+           font-weight: 700;
+           color: white;
+       }
+      
+       .logo span { color: #fff6fb; }
+      
+       nav ul {
+           display: flex;
+           gap: 40px;
+           list-style: none;
+       }
+      
+       nav a {
+           color: white;
+           text-decoration: none;
+           font-weight: 600;
+           font-size: 17px;
+       }
+      
+       nav a:hover { color: #fff6fb; }
+      
+       .hamburger { display: none; font-size: 28px; color: white; cursor: pointer; }
+      
+       .hero {
+           height: 100vh;
+           background: linear-gradient(rgba(255,214,231,0.65), rgba(255,214,231,0.65)), url('https://i.ibb.co/C5FgJRmD/IMG-5554.jpg/id/1015/1920/1080') center/cover;
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           text-align: center;
+           color: white;
+           position: relative;
+       }
+      
+       .hero::before {
+           content: "";
+           position: absolute;
+           inset: 0;
+           background: url('https://picsum.photos/id/1015/1920/1080') center/cover;
+           opacity: 0.25;
+           z-index: -1;
+       }
+      
+       .hero-content h1 {
+           font-size: 4.8rem;
+           margin-bottom: 20px;
+           text-shadow: 0 6px 25px rgba(0,0,0,0.3);
+       }
+      
+       .hero-content p {
+           font-size: 1.9rem;
+           max-width: 680px;
+           margin: 0 auto 40px;
+       }
+      
+       .btn {
+           background: white;
+           color: #ff9ecb;
+           padding: 16px 48px;
+           border-radius: 50px;
+           font-weight: 700;
+           text-decoration: none;
+           box-shadow: 0 10px 30px rgba(255,158,203,0.4);
+           transition: 0.3s;
+       }
+      
+       .btn:hover { transform: scale(1.08); }
+      
+       section { padding: 110px 6%; position: relative; }
+      
+       .section-title {
+           font-size: 3rem;
+           text-align: center;
+           margin-bottom: 60px;
+           color: #ff9ecb;
+       }
+      
+       /* EVENTS GRID */
+       .events-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+           gap: 30px;
+       }
+      
+       .event-card {
+           background: white;
+           border-radius: 24px;
+           overflow: hidden;
+           box-shadow: 0 12px 30px rgba(255,214,231,0.3);
+           transition: 0.4s;
+       }
+      
+       .event-card:hover { transform: translateY(-15px); }
+      
+       .event-card img {
+           width: 100%;
+           height: 240px;
+           object-fit: cover;
+       }
+      
+       .event-info {
+           padding: 24px;
+           text-align: center;
+       }
+      
+       .event-info h3 {
+           color: #ff9ecb;
+           font-size: 1.6rem;
+           margin-bottom: 8px;
+       }
+      
+       /* SPECIAL CARD - KHAI GIẢNG */
+       .special-card {
+           background: linear-gradient(135deg, #ffd6e7, #ff9ecb);
+           position: relative;
+           overflow: hidden;
+       }
+      
+       .special-card::before {
+           content: "🌸";
+           position: absolute;
+           font-size: 120px;
+           opacity: 0.15;
+           top: -30px;
+           left: -20px;
+           transform: rotate(-20deg);
+       }
+      
+       .special-card::after {
+           content: "🐱";
+           position: absolute;
+           font-size: 90px;
+           opacity: 0.25;
+           bottom: -20px;
+           right: -10px;
+           transform: rotate(15deg);
+       }
+      
+       .special-card img {
+           filter: brightness(0.92);
+       }
+      
+       .special-card .event-info {
+           background: rgba(255,255,255,0.85);
+           margin: 20px;
+           border-radius: 18px;
+       }
+      
+       /* MODAL */
+       .modal {
+           position: fixed;
+           inset: 0;
+           background: rgba(0,0,0,0.75);
+           display: none;
+           align-items: center;
+           justify-content: center;
+           z-index: 2000;
+           padding: 20px;
+       }
+      
+       .modal-content {
+           background: white;
+           max-width: 900px;
+           width: 100%;
+           border-radius: 28px;
+           overflow: hidden;
+           box-shadow: 0 20px 60px rgba(255,158,203,0.5);
+       }
+      
+       .modal-header img {
+           width: 100%;
+           height: 380px;
+           object-fit: cover;
+       }
+      
+       .modal-close {
+           position: absolute;
+           top: 20px;
+           right: 30px;
+           font-size: 42px;
+           color: white;
+           cursor: pointer;
+           text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+       }
+      
+       .modal-body {
+           padding: 40px;
+           text-align: center;
+       }
+      
+       .modal-body h2 {
+           color: #ff9ecb;
+           font-size: 2.4rem;
+           margin-bottom: 20px;
+       }
+
+       footer {
+           background: var(--pink);
+           color: white;
+           padding: 80px 6% 40px;
+           text-align: center;
+       }
+      
+       .fade-in {
+           opacity: 0;
+           transform: translateY(50px);
+           transition: all 0.9s ease;
+       }
+      
+       .fade-in.visible {
+           opacity: 1;
+           transform: translateY(0);
+       }
+      
+       @media (max-width: 768px) {
+           .hamburger { display: block; }
+           nav ul {
+               position: fixed;
+               top: 70px;
+               left: -100%;
+               width: 100%;
+               background: var(--pink);
+               flex-direction: column;
+               padding: 40px 0;
+               transition: 0.4s;
+           }
+           nav ul.active { left: 0; }
+       }
+   </style>
+</head>
+<body>
+
+
+   <!-- FLOWER BACKGROUND -->
+   <div class="flower-bg">
+       <div class="flower"></div>
+       <div class="flower"></div>
+       <div class="flower"></div>
+       <div class="flower"></div>
+       <div class="flower"></div>
+       <div class="flower"></div>
+   </div>
+
+
+   <!-- HEADER -->
+   <header>
+       <div class="logo"><span>Lớp 12</span></div>
+       <nav>
+           <ul id="nav-menu">
+               <li><a href="#events">Sự kiện</a></li>
+           </ul>
+       </nav>
+       <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+   </header>
+
+
+   <!-- HERO -->
+   <section id="home" class="hero">
+       <div class="hero-content">
+           <h1>Thanh xuân</h1>
+           <p>Là những ngày chúng ta bên nhau</p>
+           <a href="#events" class="btn">Nhớ về chúng mình</a>
+       </div>
+   </section>
+
+
+   <!-- SỰ KIỆN -->
+   <section id="events">
+       <h2 class="section-title">Những khoảnh khắc không quên</h2>
+       <div class="events-grid" id="events-grid"></div>
+   </section>
+
+
+   <!-- MODAL -->
+   <div class="modal" id="modal">
+       <div class="modal-content">
+           <div class="modal-header">
+               <img id="modalImg" src="" alt="">
+               <div class="modal-close" onclick="closeModal()">×</div>
+           </div>
+           <div class="modal-body">
+               <h2 id="modalTitle"></h2>
+               <p id="modalDesc" style="font-size:1.2rem; line-height:1.9; color:#555;"></p>
+           </div>
+       </div>
+   </div>
+
+
+   <!-- CONTACT -->
+   <section id="contact" style="background: var(--cream);">
+       <h2 class="section-title">Gặp lại nhé!</h2>
+       <div style="max-width:600px; margin:0 auto; text-align:center; background:white; padding:50px; border-radius:30px; box-shadow:0 15px 40px rgba(255,158,203,0.2);">
+           <p style="font-size:1.4rem; margin-bottom:30px;">Lớp 12L • THPT Chuyên Hùng Vương - TP.HCM</p>
+       </div>
+   </section>
+
+
+   <footer>
+       © 2026 Thanh Xuân Của Chúng Ta • Lớp 12 • Made with love và rất nhiều kỷ niệm
+   </footer>
+
+
+   <script>
+       const events = [
+           {
+               id: 1,
+               title: "Rực Rỡ Khai Giảng 2025–2026",
+               date: "05.09.2025",
+               thumb: "https://i.ibb.co/nNfKJ3N8/IMG-3780.jpg/id/1015/600/400",
+               large: "https://i.ibb.co/nNfKJ3N8/IMG-3780.jpg/id/1015/1200/800",
+               url: "khaigiang.html",
+               desc: "Tiếng trống khai trường vang lên không chỉ mở đầu một năm học mới, mà còn đánh dấu một cột mốc đặc biệt."
+           },
+           {
+               id: 2,
+               title: "Ngày phụ nữ Việt Nam",
+               date: "20.10.2025",
+               thumb: "https://i.ibb.co/bRjhQP98/IMG-20260128-083158.jpg/id/133/600/400",
+               large: "https://i.ibb.co/7x3mCdSB/IMG-5566.jpg/id/133/1200/800",
+               url: "20.10.html",
+               desc: "Có những ngày bình thường bỗng trở nên đặc biệt chỉ vì nụ cười của ai đó."
+           },
+           {
+               id: 3,
+               title: "Giai điệu tuổi hồng",
+               date: "15.11.2025",
+               thumb: "https://i.ibb.co/5g43CB7R/IMG-5435.jpg/id/201/600/400",
+               large: "https://i.ibb.co/5g43CB7R/IMG-5435.jpg/id/201/1200/800",
+               url: "gdth.html",
+               desc: "Chiếc cúp quý giá nhất là chiếc cúp vô địch"
+           },
+           {
+               id: 4,
+               title: "NGÀY CỦA CÁC CHÀNG TRAI",
+               date: "19.11.2025",
+               thumb: "https://i.ibb.co/7x3mCdSB/IMG-5566.jpg/id/133/600/400",
+               large: "https://i.ibb.co/7x3mCdSB/IMG-5566.jpg/id/133/1200/800",
+               url: "19.11.html",
+               desc: "Ai nói chỉ có con gái mới được chờ đợi những ngày đặc biệt?"
+           },
+           {
+               id: 5,
+               title: "🎊👩🏻‍🏫 CHÀO MỪNG NGÀY NHÀ GIÁO VIỆT NAM 20/11 👨🏻‍🏫🎊",
+               date: "20.11.2025",
+               thumb: "https://i.ibb.co/Zz0WhR6q/IMG-5643.jpg/id/133/600/400",
+               large: "https://i.ibb.co/Zz0WhR6q/IMG-5643.jpg/id/133/1200/800",
+               url: "20.11.html",
+               desc: "Có những ngày trong năm chỉ để kỷ niệm. <br> Và có những ngày để nhớ mãi."
+           },
+           {
+               id: 6,
+               title: "Cooking cùng lớp 12L",
+               date: "31.12.2025",
+               thumb: "https://i.ibb.co/fdmNJrn1/IMG-20251231-121446.jpg/id/29/600/400",
+               large: "https://i.ibb.co/fdmNJrn1/IMG-20251231-121446.jpg/id/29/1200/800",
+               url: "cooking.html",
+               desc: "🎬 Cận cảnh trường quay Masterchef tại lớp 12L⁉️⁉️⁉️"
+           },
+           {
+               id: 7,
+               title: "Chuyến đi Đà Lạt cuối cùng",
+               date: "23.01.2025-25.01.2025",
+               thumb: "https://i.ibb.co/1GVfjW7Q/IMG-7802.jpg/id/318/600/400",
+               large: "https://i.ibb.co/1GVfjW7Q/IMG-7802.jpg/id/318/1200/800",
+               url: "dalat.html",
+               desc: "Ủa cái gì mà nhìn vui dữ vậy ta? <br> À thì ra là lớp L tụi tui đi Đà Lạt đó."
+           },
+           {
+               id: 8,
+               title: "Cùng nhau qua nhà cô Tuyên",
+               date: "09.02.2025",
+               thumb: "https://i.ibb.co/YFWwvBfF/IMG-20260211-213452.jpg/id/318/600/400",
+               large: "https://i.ibb.co/YFWwvBfF/IMG-20260211-213452.jpg/id/318/1200/800",
+               url: "coTuyen.html",
+               desc: "Hé lộ “đại tiệc” tất niên bất ngờ tại nhà cô Tuyên"
+           }
+       ];
+
+
+       function renderEvents() {
+           const grid = document.getElementById('events-grid');
+           grid.innerHTML = '';
+          
+           events.forEach(event => {
+               const card = document.createElement('div');
+               card.className = `event-card fade-in ${event.id === 1 ? 'special-card' : ''}`;
+               card.innerHTML = `
+                   <img src="${event.thumb}" alt="${event.title}">
+                   <div class="event-info">
+                       <div style="color:#ff9ecb; font-weight:600; font-size:0.95rem;">${event.date}</div>
+                       <h3>${event.title}</h3>
+                       <p style="margin-top:10px; font-size:1rem; color:#666;">${event.desc.substring(0, 90)}...</p>
+                   </div>
+               `;
+               card.onclick = () => {window.location.href = event.url;};
+               grid.appendChild(card);
+           });
+       }
+
+
+       function showModal(event) {
+           document.getElementById('modalImg').src = event.large;
+           document.getElementById('modalTitle').textContent = event.title;
+           document.getElementById('modalDesc').textContent = event.desc;
+           document.getElementById('modal').style.display = 'flex';
+       }
+
+
+       function closeModal() {
+           document.getElementById('modal').style.display = 'none';
+       }
+
+
+       document.getElementById('hamburger').addEventListener('click', () => {
+           const menu = document.getElementById('nav-menu');
+           menu.classList.toggle('active');
+       });
+
+
+       document.querySelectorAll('a[href^="#"]').forEach(a => {
+           a.addEventListener('click', e => {
+               e.preventDefault();
+               document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+           });
+       });
+
+
+       function fadeIn() {
+           document.querySelectorAll('.fade-in').forEach(el => {
+               if (el.getBoundingClientRect().top < window.innerHeight * 0.85) {
+                   el.classList.add('visible');
+               }
+           });
+       }
+       window.addEventListener('scroll', fadeIn);
+       window.addEventListener('load', () => {
+           renderEvents();
+           fadeIn();
+       });
+
+
+       document.getElementById('modal').addEventListener('click', function(e) {
+           if (e.target === this) closeModal();
+       });
+   </script>
+</body>
+</html>
+
+
+
